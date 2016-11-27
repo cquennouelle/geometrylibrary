@@ -21,6 +21,8 @@ public:
     static Angle DEG(double const aValue);
     static Angle DEG100th(double const aValue);
 
+    Angle Modulo2PI() const;
+
 private:
     Angle(double const aValue):m_value(aValue) {}
 

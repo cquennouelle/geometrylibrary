@@ -3,6 +3,9 @@ namespace Geometry
     // Fundamental constant
     static double const PI = 3.141592653589793238462643383279;
 
+    // Variations of fundamental constants
+    static double const TWO_PI = 2.0 * PI;
+
     // Conversions
     static double const DEG_TO_RAD = PI / 180.0;
     static double const RAD_TO_DEG = 180.0 / PI;

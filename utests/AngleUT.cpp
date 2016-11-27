@@ -64,3 +64,13 @@ TEST_F(Angle_Test, Deg100th)
     EXPECT_EQ(angleOneDeg100th.Deg(), 0.01);
     EXPECT_EQ(angleOneRad1.Deg100th(), RAD_TO_DEG100TH);
 }
+
+TEST_F(Angle_Test, Modulo2PI)
+{
+    Angle angle2pi = RAD(2.0*PI);
+    Angle angle2pi_one = RAD(2.0*PI+1.0);
+    EXPECT_FALSE(angleZero1 == angle2pi);
+    EXPECT_TRUE(angleZero1 == angle2pi.Modulo2PI());
+    EXPECT_FALSE(angleOneRad1 == angle2pi_one);
+    EXPECT_TRUE(angleOneRad1 == angle2pi_one.Modulo2PI());
+}
