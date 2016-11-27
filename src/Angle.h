@@ -2,6 +2,7 @@
 #define __ANGLE_H__
 #include "Constants.h"
 #include <iostream>
+#include <cmath>
 
 namespace Geometry
 {
@@ -31,6 +32,7 @@ public:
     Angle operator/(double const & aValue) const;
 
     bool operator==(Angle const & aAngle) const;
+    bool operator!=(Angle const & aAngle) const;
     bool operator>(Angle const & aAngle) const;
     bool operator<(Angle const & aAngle) const;
     bool operator>=(Angle const & aAngle) const;
@@ -58,15 +60,64 @@ inline Angle RAD(double const aValue) { return Angle::RAD(aValue); }
 inline Angle DEG(double const aValue) { return Angle::DEG(aValue); }
 inline Angle DEG100th(double const aValue) { return Angle::DEG100th(aValue); }
 
-inline Angle operator*(double const aValue, Angle const & aAngle)
+}
+
+inline Geometry::Angle operator*(double const aValue, Geometry::Angle const & aAngle)
 {
     return aAngle*aValue;
 }
 
-inline std::ostream & operator<<(std::ostream & out, Angle const & aAngle)
+inline double cos(Geometry::Angle const & aAngle)
+{
+    double const value = aAngle.Rad();
+    return cos(value);
+}
+
+inline double sin(Geometry::Angle const & aAngle)
+{
+    double const value = aAngle.Rad();
+    return sin(value);
+}
+
+inline double tan(Geometry::Angle const & aAngle)
+{
+    double const value = aAngle.Rad();
+    return tan(value);
+}
+
+inline Geometry::Angle fabs(Geometry::Angle const & aAngle)
+{
+    double const value = aAngle.Rad();
+    return Geometry::RAD(fabs(value));
+}
+
+inline Geometry::Angle arccos(double const aValue)
+{
+    double const value = acos(aValue);
+    return Geometry::RAD(fabs(value));
+}
+
+inline Geometry::Angle arcsin(double const aValue)
+{
+    double const value = asin(aValue);
+    return Geometry::RAD(fabs(value));
+}
+
+inline Geometry::Angle arctan(double const aValue)
+{
+    double const value = atan(aValue);
+    return Geometry::RAD(fabs(value));
+}
+
+inline Geometry::Angle arctan2(double const aY, double const aX)
+{
+    double const value = atan2(aY, aX);
+    return Geometry::RAD(fabs(value));
+}
+
+inline std::ostream & operator<<(std::ostream & out, Geometry::Angle const & aAngle)
 {
     out << aAngle.Rad();
     return out;
-}
 }
 #endif //__ANGLE_H__

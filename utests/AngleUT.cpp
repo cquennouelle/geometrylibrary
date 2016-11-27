@@ -126,21 +126,25 @@ TEST_F(Angle_Test, Modulo2PI_0)
 
 TEST_F(Angle_Test, Operator_Greater)
 {
-    EXPECT_TRUE(angleOneRad1 > angleZero1);
-    EXPECT_FALSE(angleZero1 > angleOneRad1);
-    EXPECT_FALSE(angleZero1 > angleZero1);
+    EXPECT_TRUE(RAD(1.0) > RAD(0.0));
+    EXPECT_GT(RAD(1.0), RAD(0.0));
+
+    EXPECT_FALSE(RAD(0.0) > RAD(1.0));
+    EXPECT_FALSE(RAD(0.0) > RAD(0.0));
 
     Angle angle1 = RAD(-10.0);
     Angle angle2 = DEG(-10.0);
     EXPECT_TRUE(angle2 > angle1);
     EXPECT_FALSE(angle1 > angle2);
+    EXPECT_GT(angle2, angle1);
 }
 
 TEST_F(Angle_Test, Operator_Less)
 {
-    EXPECT_FALSE(angleOneRad1 < angleZero1);
-    EXPECT_TRUE(angleZero1 < angleOneRad1);
-    EXPECT_FALSE(angleZero1 < angleZero1);
+    EXPECT_FALSE(RAD(1.0) < RAD(0.0));
+    EXPECT_TRUE(RAD(0.0) < RAD(1.0));
+    EXPECT_LT(RAD(0.0), RAD(1.0));
+    EXPECT_FALSE(RAD(0.0) < angleZero1);
 
     Angle angle1 = RAD(-10.0);
     Angle angle2 = DEG(-10.0);
@@ -150,110 +154,116 @@ TEST_F(Angle_Test, Operator_Less)
 
 TEST_F(Angle_Test, Operator_GreaterEq)
 {
-    EXPECT_TRUE(angleOneRad1 >= angleZero1);
-    EXPECT_FALSE(angleZero1 >= angleOneRad1);
-    EXPECT_TRUE(angleZero1 >= angleZero1);
+    EXPECT_TRUE(RAD(1.0) >= RAD(0.0));
+    EXPECT_GE(RAD(1.0), RAD(0.0));
+    EXPECT_FALSE(RAD(0.0) >= RAD(1.0));
+    EXPECT_TRUE(RAD(0.0) >= RAD(0.0));
 
     Angle angle1 = RAD(-10.0);
     Angle angle2 = DEG(-10.0);
     EXPECT_TRUE(angle2 >= angle1);
+    EXPECT_GE(angle2, angle1);
+    EXPECT_GE(angle2, angle2);
     EXPECT_FALSE(angle1 >= angle2);
 }
 
 TEST_F(Angle_Test, Operator_LessEq)
 {
-    EXPECT_FALSE(angleOneRad1 <= angleZero1);
-    EXPECT_TRUE(angleZero1 <= angleOneRad1);
-    EXPECT_TRUE(angleZero1 <= angleZero1);
+    EXPECT_FALSE(RAD(1.0) <= RAD(0.0));
+    EXPECT_TRUE(RAD(0.0) <= RAD(1.0));
+    EXPECT_LE(RAD(0.0), RAD(1.0));
+    EXPECT_TRUE(RAD(0.0) <= RAD(0.0));
 
     Angle angle1 = RAD(-10.0);
     Angle angle2 = DEG(-10.0);
     EXPECT_FALSE(angle2 <= angle1);
     EXPECT_TRUE(angle1 <= angle2);
+    EXPECT_LE(angle1, angle2);
+    EXPECT_LE(angle1, angle1);
 }
 
 TEST_F(Angle_Test, OperatorMinus)
 {
-    Angle angle_m1 = -angleOneRad1;
-    EXPECT_EQ(angle_m1.Rad(), -(angleOneRad1.Rad()));
+    Angle angle_m1 = -RAD(1.0);
+    EXPECT_EQ(angle_m1.Rad(), -1.0);
     Angle angle_1 = -angle_m1;
-    EXPECT_EQ(angle_1, angleOneRad1);
+    EXPECT_EQ(angle_1, RAD(1.0));
 }
 
 TEST_F(Angle_Test, OperatorAddSelf)
 {
-    Angle angle = angleZero1;
-    EXPECT_EQ(angle, angleZero1);
-    angle+=angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
-    angle+=angleOneRad1;
+    Angle angle = RAD(0.0);
+    EXPECT_EQ(angle, RAD(0.0));
+    angle+=RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
+    angle+=RAD(1.0);
     EXPECT_EQ(angle, RAD(2.0));
-    angle+= -angleOneRad1;
-    angle+= -angleOneRad1;
-    EXPECT_EQ(angle, angleZero1);
+    angle+= -RAD(1.0);
+    angle+= -RAD(1.0);
+    EXPECT_EQ(angle, RAD(0.0));
 }
 
 TEST_F(Angle_Test, OperatorSubstractSelf)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
-    angle-=angleOneRad1;
-    EXPECT_EQ(angle, angleZero1);
-    angle-=angleOneRad1;
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
+    angle-=RAD(1.0);
+    EXPECT_EQ(angle, RAD(0.0));
+    angle-=RAD(1.0);
     EXPECT_EQ(angle, RAD(-1.0));
-    angle-= -angleOneRad1;
-    angle-= -angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
+    angle-= -RAD(1.0);
+    angle-= -RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
 }
 
 TEST_F(Angle_Test, OperatorMultiplySelf)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
     angle*=2.0;
     EXPECT_EQ(angle, RAD(2.0));
     angle*=5;
     EXPECT_EQ(angle, RAD(10));
     angle*= 0.0;
-    EXPECT_EQ(angle, angleZero1);
+    EXPECT_EQ(angle, RAD(0.0));
 }
 
 TEST_F(Angle_Test, OperatorDivideSelf)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
     angle/=2.0;
     EXPECT_EQ(angle, RAD(0.5));
 }
 
 TEST_F(Angle_Test, OperatorAdd)
 {
-    Angle angle = angleZero1;
-    EXPECT_EQ(angle, angleZero1);
-    Angle angle1 = angle+angleOneRad1;
-    EXPECT_EQ(angle1, angleOneRad1);
-    Angle angle2 = angle1+angleOneRad1;
+    Angle angle = RAD(0.0);
+    EXPECT_EQ(angle, RAD(0.0));
+    Angle angle1 = angle+RAD(1.0);
+    EXPECT_EQ(angle1, RAD(1.0));
+    Angle angle2 = angle1+RAD(1.0);
     EXPECT_EQ(angle2, RAD(2.0));
-    Angle angle3 = angle2+(-(angleOneRad1+angleOneRad1));
-    EXPECT_EQ(angle3, angleZero1);
+    Angle angle3 = angle2+(-(RAD(1.0)+RAD(1.0)));
+    EXPECT_EQ(angle3, RAD(0.0));
 }
 
 TEST_F(Angle_Test, OperatorSubstract)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
-    Angle angle1 = angle-angleOneRad1;
-    EXPECT_EQ(angle1, angleZero1);
-    Angle angle2 = angle1-angleOneRad1;
-    EXPECT_EQ(angle2, -angleOneRad1);
-    Angle angle3 = angle2-(angleOneRad1+angleOneRad1);
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
+    Angle angle1 = angle-RAD(1.0);
+    EXPECT_EQ(angle1, RAD(0.0));
+    Angle angle2 = angle1-RAD(1.0);
+    EXPECT_EQ(angle2, -RAD(1.0));
+    Angle angle3 = angle2-(RAD(1.0)+RAD(1.0));
     EXPECT_EQ(angle3, RAD(-3.0));
 }
 
 TEST_F(Angle_Test, OperatorMultiply)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
     Angle angle1 = angle*2.0;
     EXPECT_EQ(angle1, RAD(2.0));
     Angle angle2 = angle1*5;
@@ -261,15 +271,52 @@ TEST_F(Angle_Test, OperatorMultiply)
     Angle angle3 = 10.0*angle2;
     EXPECT_EQ(angle3, RAD(100.0));
     Angle angle4 = 0.0*angle3;
-    EXPECT_EQ(angle4, angleZero1);
+    EXPECT_EQ(angle4, RAD(0.0));
 }
 
 TEST_F(Angle_Test, OperatorDivide)
 {
-    Angle angle = angleOneRad1;
-    EXPECT_EQ(angle, angleOneRad1);
+    Angle angle = RAD(1.0);
+    EXPECT_EQ(angle, RAD(1.0));
     Angle angle1 = angle/2.0;
     EXPECT_EQ(angle1, RAD(0.5));
     Angle angle2 = angle1/0.05;
     EXPECT_EQ(angle2, RAD(10));
+}
+
+TEST_F(Angle_Test, TrigonometricFunctions)
+{
+    EXPECT_EQ(sin(RAD(0.0)), 0.0);
+    EXPECT_EQ(sin(RAD(1.0)), sin(1.0));
+    EXPECT_EQ(cos(RAD(0.0)), 1.0);
+    EXPECT_EQ(cos(RAD(1.0)), cos(1.0));
+    EXPECT_EQ(tan(RAD(0.0)), 0.0);
+    EXPECT_EQ(tan(RAD(1.0)), tan(1.0));
+
+    EXPECT_EQ(fabs(-RAD(1.0)), RAD(1.0));
+    EXPECT_NE(fabs(-RAD(1.0)), -RAD(1.0));
+
+    Angle angle1 = arctan2(0.0, 0.0);
+    EXPECT_EQ(angle1, RAD(0.0));
+
+    Angle angle2 = arctan2(sin(1.0), cos(1.0));
+    EXPECT_EQ(angle2, RAD(1.0));
+
+    Angle angle3 = arccos(0.0);
+    EXPECT_EQ(angle3, RAD(acos(0.0)));
+
+    Angle angle4 = arccos(1.0);
+    EXPECT_EQ(angle4, RAD(acos(1.0)));
+
+    Angle angle5 = arcsin(0.0);
+    EXPECT_EQ(angle5, RAD(0.0));
+
+    Angle angle6 = arcsin(1.0);
+    EXPECT_EQ(angle6, RAD(asin(1.0)));
+
+    Angle angle7 = arctan(0.0);
+    EXPECT_EQ(angle7, RAD(0.0));
+
+    Angle angle8 = arctan(1.0);
+    EXPECT_EQ(angle8, RAD(atan(1.0)));
 }

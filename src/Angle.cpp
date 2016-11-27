@@ -66,6 +66,11 @@ bool Angle::operator==(Angle const & aAngle) const
     return diff < ANGLE_EPSILON;
 }
 
+bool Angle::operator!=(Angle const & aAngle) const
+{
+    return !((*this)==aAngle);
+}
+
 bool Angle::operator>(Angle const & aAngle) const
 {
     return m_value > aAngle.m_value;
