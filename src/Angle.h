@@ -100,19 +100,19 @@ inline Geometry::Angle arccos(double const aValue)
 inline Geometry::Angle arcsin(double const aValue)
 {
     double const value = asin(aValue);
-    return Geometry::RAD(fabs(value));
+    return Geometry::RAD(value);
 }
 
 inline Geometry::Angle arctan(double const aValue)
 {
     double const value = atan(aValue);
-    return Geometry::RAD(fabs(value));
+    return Geometry::RAD(value);
 }
 
 inline Geometry::Angle arctan2(double const aY, double const aX)
 {
     double const value = atan2(aY, aX);
-    return Geometry::RAD(fabs(value));
+    return Geometry::RAD(value);
 }
 
 inline std::ostream & operator<<(std::ostream & out, Geometry::Angle const & aAngle)
