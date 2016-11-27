@@ -6,7 +6,7 @@ namespace Geometry
     // Conversions
     static double const DEG_TO_RAD = PI / 180.0;
     static double const RAD_TO_DEG = 180.0 / PI;
-    static double const DEG100TH_TO_RAD = PI / 180.0 * 0.01;
-    static double const RAD_TO_DEG100TH = 180.0 / PI * 100.0;
+    static double const DEG100TH_TO_RAD = DEG_TO_RAD * 0.01;
+    static double const RAD_TO_DEG100TH = RAD_TO_DEG * 100.0;
 }
 
