@@ -3,10 +3,38 @@
 
 using namespace Geometry;
 
-bool Angle::operator==(Angle const aAngle) const
+Angle Angle::m_EPSILON = Angle(ANGLE_EPSILON);
+
+Angle &Angle::operator=(Angle const &aAngle)
+{
+    m_value = aAngle.m_value;
+    return *this;
+}
+
+bool Angle::operator==(Angle const & aAngle) const
 {
     double const diff = fabs(m_value-aAngle.m_value);
     return diff < ANGLE_EPSILON;
+}
+
+bool Angle::operator>(Angle const & aAngle) const
+{
+    return m_value > aAngle.m_value;
+}
+
+bool Angle::operator<(Angle const & aAngle) const
+{
+    return m_value < aAngle.m_value;
+}
+
+bool Angle::operator>=(Angle const & aAngle) const
+{
+    return m_value >= aAngle.m_value;
+}
+
+bool Angle::operator<=(Angle const & aAngle) const
+{
+    return m_value <= aAngle.m_value;
 }
 
 Angle Angle::RAD(double const aValue)

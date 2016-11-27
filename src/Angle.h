@@ -14,9 +14,15 @@ public:
     double Rad() const { return m_value; }
     double Deg() const { return m_value * RAD_TO_DEG; }
     double Deg100th() const { return m_value * RAD_TO_DEG * 100.0; }
-    Angle & operator=(Angle const & aAngle) { m_value = aAngle.m_value; return *this; }
+    static Angle const EPSILON() { return m_EPSILON; }
 
-    bool operator==(Angle const aAngle) const;
+    Angle & operator=(Angle const & aAngle);
+
+    bool operator==(Angle const & aAngle) const;
+    bool operator>(Angle const & aAngle) const;
+    bool operator<(Angle const & aAngle) const;
+    bool operator>=(Angle const & aAngle) const;
+    bool operator<=(Angle const & aAngle) const;
 
     static Angle RAD(double const aValue);
     static Angle DEG(double const aValue);
@@ -32,6 +38,7 @@ private:
 
 private:
     double m_value;
+    static Angle m_EPSILON;
 
 };
 

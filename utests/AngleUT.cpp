@@ -115,3 +115,51 @@ TEST_F(Angle_Test, Modulo2PI_0)
         EXPECT_TRUE(angle1.Module2PI_0() == angle2.Module2PI_0());
     }
 }
+
+TEST_F(Angle_Test, Operator_Greater)
+{
+    EXPECT_TRUE(angleOneRad1 > angleZero1);
+    EXPECT_FALSE(angleZero1 > angleOneRad1);
+    EXPECT_FALSE(angleZero1 > angleZero1);
+
+    Angle angle1 = RAD(-10.0);
+    Angle angle2 = DEG(-10.0);
+    EXPECT_TRUE(angle2 > angle1);
+    EXPECT_FALSE(angle1 > angle2);
+}
+
+TEST_F(Angle_Test, Operator_Less)
+{
+    EXPECT_FALSE(angleOneRad1 < angleZero1);
+    EXPECT_TRUE(angleZero1 < angleOneRad1);
+    EXPECT_FALSE(angleZero1 < angleZero1);
+
+    Angle angle1 = RAD(-10.0);
+    Angle angle2 = DEG(-10.0);
+    EXPECT_FALSE(angle2 < angle1);
+    EXPECT_TRUE(angle1 < angle2);
+}
+
+TEST_F(Angle_Test, Operator_GreaterEq)
+{
+    EXPECT_TRUE(angleOneRad1 >= angleZero1);
+    EXPECT_FALSE(angleZero1 >= angleOneRad1);
+    EXPECT_TRUE(angleZero1 >= angleZero1);
+
+    Angle angle1 = RAD(-10.0);
+    Angle angle2 = DEG(-10.0);
+    EXPECT_TRUE(angle2 >= angle1);
+    EXPECT_FALSE(angle1 >= angle2);
+}
+
+TEST_F(Angle_Test, Operator_LessEq)
+{
+    EXPECT_FALSE(angleOneRad1 <= angleZero1);
+    EXPECT_TRUE(angleZero1 <= angleOneRad1);
+    EXPECT_TRUE(angleZero1 <= angleZero1);
+
+    Angle angle1 = RAD(-10.0);
+    Angle angle2 = DEG(-10.0);
+    EXPECT_FALSE(angle2 <= angle1);
+    EXPECT_TRUE(angle1 <= angle2);
+}
