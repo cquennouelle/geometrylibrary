@@ -14,12 +14,17 @@ Installation
 Requires GTests (and Python ?)
 
 - Clone repository
-$ git clone https://github.com/cquennouelle/geometrylibrary.git
+
+	$ git clone https://github.com/cquennouelle/geometrylibrary.git
+
 - Create build directory and build source code:
-$ cd geometrylibrary
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
+	
+	$ cd geometrylibrary
+	$ mkdir build
+	$ cd build
+	$ cmake ..
+	$ make
+
 - Launch tests
-$ utests/Geometry_UT
+	
+	$ utests/Geometry_UT
