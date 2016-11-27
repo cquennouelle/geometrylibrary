@@ -11,6 +11,55 @@ Angle &Angle::operator=(Angle const &aAngle)
     return *this;
 }
 
+Angle Angle::operator-() const
+{
+    return Angle(-m_value);
+}
+
+Angle & Angle::operator+=(Angle const & aAngle)
+{
+    m_value += aAngle.m_value;
+    return *this;
+}
+
+Angle & Angle::operator-=(Angle const & aAngle)
+{
+    m_value -= aAngle.m_value;
+    return *this;
+}
+
+Angle & Angle::operator*=(const double &aValue)
+{
+    m_value *= aValue;
+    return *this;
+}
+
+Angle & Angle::operator/=(const double &aValue)
+{
+    m_value /= aValue;
+    return *this;
+}
+
+Angle Angle::operator+(const Angle &aAngle) const
+{
+    return Angle(*this)+=aAngle;
+}
+
+Angle Angle::operator-(const Angle &aAngle) const
+{
+    return Angle(*this)-=aAngle;
+}
+
+Angle Angle::operator*(const double &aValue) const
+{
+    return Angle(*this)*=aValue;
+}
+
+Angle Angle::operator/(const double &aValue) const
+{
+    return Angle(*this)/=aValue;
+}
+
 bool Angle::operator==(Angle const & aAngle) const
 {
     double const diff = fabs(m_value-aAngle.m_value);

@@ -9,6 +9,7 @@ class Angle
 {
 public:
     Angle():m_value(0.0) {}
+    Angle(Angle const & aAngle):m_value(aAngle.m_value) {}
     ~Angle() {}
 
     double Rad() const { return m_value; }
@@ -17,6 +18,17 @@ public:
     static Angle const EPSILON() { return m_EPSILON; }
 
     Angle & operator=(Angle const & aAngle);
+
+    Angle operator-() const;
+    Angle & operator+=(Angle const & aAngle);
+    Angle & operator-=(Angle const & aAngle);
+    Angle & operator*=(double const & aValue);
+    Angle & operator/=(double const & aValue);
+
+    Angle operator+(Angle const & aAngle) const;
+    Angle operator-(Angle const & aAngle) const;
+    Angle operator*(double const & aValue) const;
+    Angle operator/(double const & aValue) const;
 
     bool operator==(Angle const & aAngle) const;
     bool operator>(Angle const & aAngle) const;
@@ -45,6 +57,11 @@ private:
 inline Angle RAD(double const aValue) { return Angle::RAD(aValue); }
 inline Angle DEG(double const aValue) { return Angle::DEG(aValue); }
 inline Angle DEG100th(double const aValue) { return Angle::DEG100th(aValue); }
+
+inline Angle operator*(double const aValue, Angle const & aAngle)
+{
+    return aAngle*aValue;
+}
 
 inline std::ostream & operator<<(std::ostream & out, Angle const & aAngle)
 {
