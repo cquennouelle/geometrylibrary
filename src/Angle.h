@@ -1,6 +1,7 @@
 #ifndef __ANGLE_H__
 #define __ANGLE_H__
 #include "Constants.h"
+#include <iostream>
 
 namespace Geometry
 {
@@ -22,9 +23,12 @@ public:
     static Angle DEG100th(double const aValue);
 
     Angle Modulo2PI() const;
+    Angle Module2PI_0() const;
 
 private:
     Angle(double const aValue):m_value(aValue) {}
+
+    static double GetNormalizedValue(double const aValue);
 
 private:
     double m_value;
@@ -35,5 +39,10 @@ inline Angle RAD(double const aValue) { return Angle::RAD(aValue); }
 inline Angle DEG(double const aValue) { return Angle::DEG(aValue); }
 inline Angle DEG100th(double const aValue) { return Angle::DEG100th(aValue); }
 
+inline std::ostream & operator<<(std::ostream & out, Angle const & aAngle)
+{
+    out << aAngle.Rad();
+    return out;
+}
 }
 #endif //__ANGLE_H__

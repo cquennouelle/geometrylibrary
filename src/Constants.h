@@ -2,6 +2,7 @@ namespace Geometry
 {
     // Fundamental constant
     static double const PI = 3.141592653589793238462643383279;
+    static double const ANGLE_EPSILON = 1e-14;
 
     // Variations of fundamental constants
     static double const TWO_PI = 2.0 * PI;
