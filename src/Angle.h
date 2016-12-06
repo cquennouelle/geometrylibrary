@@ -4,204 +4,304 @@
 #include <iostream>
 #include <cmath>
 
-//TODO: Doxygen
+/**
+ * \file Angle.h
+ * \brief Creation of a type Angle.
+ * \author Cyril Quennouelle
+ * \version 0.1
+ * \date 06/12/2016
+ * \brief Contains the definition of class Angle
+ *
+ * \details The main objectives of this class is to remove units problems and to manage periodicity
+ *
+ */
 
 namespace Geometry
 {
+
+/**
+ * \brief The Angle class
+ */
 class Angle
 {
 public:
+    /**
+     * \brief Default empty constructor (Value of the angle is zero rad.)
+     */
     Angle();
-    Angle(Angle const & aAngle);
+
+    /**
+     * \brief Copy constructor
+     */
+    Angle(Angle const & angle);
+
     ~Angle() {}
 
-    double Rad() const;
-    double Deg() const;
-    double Deg100th() const;
-    static Angle const EPSILON();
+    /**
+     * \brief Get the angle value in radian
+     * \return double
+     */
+    inline double Rad() const;
 
-    inline Angle & operator=(Angle const & aAngle);
-    inline bool const operator==(Geometry::Angle const & aAngle) const;
-    inline bool const operator!=(Geometry::Angle const & aAngle) const;
+    /**
+     * \brief Get the angle value in degree.
+     * \return double
+     */
+    inline double Deg() const;
+
+    /**
+     * \brief Get the angle value in 1/100 of degree.
+     * \return double
+     */
+    inline double Deg100th() const;
+
+    /**
+     * \brief Get the angle of neglectible value.
+     * \return Angle close to zero.
+     */
+    inline static Angle const EPSILON();
+
+    inline Angle & operator=(Angle const & angle);
+
+    /**
+     * \brief IsEqual operator.
+     * \remark Angles are equal if difference is smaller than Angle::EPSILON()
+     * \return bool
+     */
+    inline bool const operator==(Geometry::Angle const & angle) const;
+
+    /**
+     * \brief IsNotEqual operator.
+     * \remark Angles are equal if difference is smaller than Angle::EPSILON()
+     * \return bool
+     */
+    inline bool const operator!=(Geometry::Angle const & angle) const;
 
     inline Angle const operator-() const;
-    inline Angle & operator+=(Angle const & aAngle);
-    inline Angle & operator-=(Angle const & aAngle);
-    inline Angle & operator*=(double const & aValue);
-    inline Angle & operator/=(double const & aValue);
+    inline Angle & operator+=(Angle const & angle);
+    inline Angle & operator-=(Angle const & angle);
+    inline Angle & operator*=(double const & value);
+    inline Angle & operator/=(double const & value);
 
-    inline static Angle RAD(double const aValue);
-    inline static Angle DEG(double const aValue);
-    inline static Angle DEG100th(double const aValue);
+    /**
+     * @brief Factory method to create an angle.
+     * @param value of the angle in radian.
+     * @return New angle.
+     */
+    inline static Angle RAD(double const value);
 
-    inline Angle Modulo2PI(double const aRangeMin = 0.0) const;
+    /**
+     * @brief Factory method to create an angle.
+     * @param Value of the angle in degree.
+     * @return New angle.
+     */
+    inline static Angle DEG(double const value);
+
+    /**
+     * @brief Factory method to create an angle.
+     * @param Value of the angle in 1/100 degree.
+     * @return New angle.
+     */
+    inline static Angle DEG100th(double const value);
+
+    /**
+     * @brief Get the equivalent angle in a 2-PI period
+     * @param Min value of the period
+     * @return Equivalent angle between [rangeMin, rangeMin+2PI[
+     */
+    inline Angle Modulo2PI(double const rangeMin = 0.0) const;
 
 private:
+    /**
+     * @brief Constructor form a double
+     * @remark Use forbidden. Use factory method RAD, DEG, etc.
+     * @param Angle with a value of aValue in radian
+     */
     Angle(double const aValue);
 
-    static double GetNormalizedValue(double const aValue, double const aRangeMin);
+    static double GetNormalizedValue(double const value, double const rangeMin);
 
 private:
-    double m_value;
-    static Angle m_EPSILON;
-
+    double m_value; //!< Internal value of the angle in Radian.
+    static Angle m_EPSILON; //!< Value for comparison between angles
 };
 
-inline Angle RAD(double const aValue) {
-    return Angle::RAD(aValue); }
+inline Angle RAD(double const aValue) { return Angle::RAD(aValue); }
 
-inline Angle DEG(double const aValue) {
-    return Angle::DEG(aValue); }
+inline Angle DEG(double const aValue) { return Angle::DEG(aValue); }
 
-inline Angle DEG100th(double const aValue) {
-    return Angle::DEG100th(aValue); }
+inline Angle DEG100th(double const aValue) { return Angle::DEG100th(aValue); }
+
+//////////////////////////////////////////////////////////////////////////////////////
+// Inline member methods
+//////////////////////////////////////////////////////////////////////////////////////
+
+double Angle::Rad() const { return m_value; }
+
+double Angle::Deg() const { return m_value * RAD_TO_DEG; }
+
+double Angle::Deg100th() const { return m_value * RAD_TO_DEG100TH; }
+
+Angle const Angle::EPSILON() { return Angle::m_EPSILON; }
+
+bool const Angle::operator==(Angle const & angle) const {
+    double const diff = fabs(Rad()-angle.Rad());
+    return diff < ANGLE_EPSILON;
 }
 
-inline Geometry::Angle const operator+(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return Geometry::Angle(aAngle)+=aAngle2;
+bool const Angle::operator!=(Angle const & angle) const {
+    return !((*this)==angle);
 }
 
-inline Geometry::Angle const operator-(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return Geometry::Angle(aAngle)-=aAngle2;
+Angle & Angle::operator=(Angle const &angle) {
+    m_value = angle.m_value;
+    return *this;
 }
 
-inline Geometry::Angle const operator*(Geometry::Angle const & aAngle, double const & aValue) {
-    return Geometry::Angle(aAngle)*=aValue;
+Angle const Angle::operator-() const { return Angle(-m_value); }
+
+Angle & Angle::operator+=(Angle const & angle) {
+    m_value += angle.m_value;
+    return *this;
 }
-inline Geometry::Angle const operator/(Geometry::Angle const & aAngle, double const & aValue) {
-    return Geometry::Angle(aAngle)/=aValue;
+
+Angle & Angle::operator-=(Angle const & angle) {
+    m_value -= angle.m_value;
+    return *this;
+}
+
+Angle & Angle::operator*=(const double &value) {
+    m_value *= value;
+    return *this;
+}
+
+Angle & Angle::operator/=(const double &value) {
+    m_value /= value;
+    return *this;
+}
+
+Angle Angle::RAD(double const value) { return Angle(value); }
+
+Angle Angle::DEG(double const value) { return Angle(value*DEG_TO_RAD); }
+
+Angle Angle::DEG100th(double const value) { return Angle(value*DEG100TH_TO_RAD); }
+
+Angle Angle::Modulo2PI(double const rangeMin) const
+{
+    double normalizedValue = GetNormalizedValue(m_value, rangeMin);
+    return Angle(normalizedValue);
+}
+}
+
+inline Geometry::Angle const operator+(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
+    return Geometry::Angle(angle)+=angle2;
+}
+
+inline Geometry::Angle const operator-(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
+    return Geometry::Angle(angle)-=angle2;
+}
+
+inline Geometry::Angle const operator*(Geometry::Angle const & angle, double const & value) {
+    return Geometry::Angle(angle)*=value;
+}
+inline Geometry::Angle const operator/(Geometry::Angle const & angle, double const & value) {
+    return Geometry::Angle(angle)/=value;
 }
 
 inline bool const operator>(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
     return aAngle.Rad() > aAngle2.Rad();
 }
 
-inline bool const operator<(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return aAngle.Rad() < aAngle2.Rad();
+inline bool const operator<(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
+    return angle.Rad() < angle2.Rad();
 }
 
-inline bool const operator>=(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return aAngle.Rad() >= aAngle2.Rad();
+inline bool const operator>=(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
+    return angle.Rad() >= angle2.Rad();
 }
 
-inline bool const operator<=(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return aAngle.Rad() <= aAngle2.Rad();
+inline bool const operator<=(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
+    return angle.Rad() <= angle2.Rad();
 }
 
-inline Geometry::Angle operator*(double const aValue, Geometry::Angle const & aAngle) {
-    return aAngle * aValue;
+inline Geometry::Angle operator*(double const value, Geometry::Angle const & angle) {
+    return angle * value;
 }
 
-inline double cos(Geometry::Angle const & aAngle) {
-    return cos(aAngle.Rad()); }
+/**
+ * @brief Overload of cosinus
+ * @param Angle
+ * @return cos
+ */
+inline double cos(Geometry::Angle const & angle) {
+    return cos(angle.Rad()); }
 
+/**
+ * @brief Overload of sinus
+ * @param Angle
+ * @return sin
+ */
 inline double sin(Geometry::Angle const & aAngle) {
     return sin(aAngle.Rad()); }
 
-inline double tan(Geometry::Angle const & aAngle) {
-    return tan(aAngle.Rad()); }
+/**
+ * @brief Overload of tangent
+ * @param Angle
+ * @return tan
+ */
+inline double tan(Geometry::Angle const & angle) {
+    return tan(angle.Rad()); }
 
-inline Geometry::Angle fabs(Geometry::Angle const & aAngle) {
-    return Geometry::RAD(fabs(aAngle.Rad()));
+/**
+ * @brief Overload of absolute value
+ * @param Angle
+ * @return Angle with positive value
+ */
+inline Geometry::Angle fabs(Geometry::Angle const & angle) {
+    return Geometry::RAD(fabs(angle.Rad()));
 }
 
-inline Geometry::Angle arccos(double const aValue) {
-    return Geometry::RAD(acos(aValue)); }
+/**
+ * @brief Overload of acos to get an angle
+ * @param Value of the cosinus
+ * @return Angle
+ */
+inline Geometry::Angle arccos(double const cosinus) {
+    return Geometry::RAD(acos(cosinus)); }
 
-inline Geometry::Angle arcsin(double const aValue) {
-    return Geometry::RAD(asin(aValue)); }
+/**
+ * @brief Overload of asin to get an angle
+ * @param Value of the sinus
+ * @return Angle
+ */
+inline Geometry::Angle arcsin(double const sinus) {
+    return Geometry::RAD(asin(sinus)); }
 
-inline Geometry::Angle arctan(double const aValue) {
-    return Geometry::RAD(atan(aValue)); }
+/**
+ * @brief Overload of atan to get an angle
+ * @param Value of the tangent
+ * @return Angle
+ */
+inline Geometry::Angle arctan(double const tangent) {
+    return Geometry::RAD(atan(tangent)); }
 
-inline Geometry::Angle arctan2(double const aY, double const aX) {
-    return Geometry::RAD(atan2(aY, aX)); }
+/**
+ * @brief Overload of atan2 to get an angle
+ * @param Value of the cosinus
+ * @return Angle
+ */
+inline Geometry::Angle arctan2(double const sinus, double const cosinus) {
+    return Geometry::RAD(atan2(sinus, cosinus)); }
 
-inline std::ostream & operator<<(std::ostream & out, Geometry::Angle const & aAngle) {
-    out << aAngle.Rad();
+/**
+ * @brief Overload operator <<
+ * @param Ostream out
+ * @param Angle aAngle
+ * @return Ostream
+ */
+inline std::ostream & operator<<(std::ostream & out, Geometry::Angle const & angle) {
+    out << angle.Rad();
     return out;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////
-// Inline member methods
-//////////////////////////////////////////////////////////////////////////////////////
-
-
-Geometry::Angle::Angle():m_value(0.0) {
-}
-
-Geometry::Angle::Angle(Geometry::Angle::Angle const & aAngle):m_value(aAngle.m_value) {
-}
-
-Geometry::Angle::Angle(double const aValue):m_value(aValue) {
-}
-
-double Geometry::Angle::Rad() const {
-    return m_value; }
-
-double Geometry::Angle::Deg() const {
-    return m_value * RAD_TO_DEG; }
-
-double Geometry::Angle::Deg100th() const {
-    return m_value * RAD_TO_DEG100TH; }
-
-static Geometry::Angle::Angle const EPSILON() {
-    return m_EPSILON; }
-
-bool const Geometry::Angle::operator==(Geometry::Angle const & aAngle) const {
-    double const diff = fabs(Rad()-aAngle.Rad());
-    return diff < Geometry::ANGLE_EPSILON;
-}
-
-bool const Geometry::Angle::operator!=(Geometry::Angle const & aAngle) const {
-    return !((*this)==aAngle);
-}
-
-Geometry::Angle & Geometry::Angle::operator=(Geometry::Angle const &aAngle) {
-    m_value = aAngle.m_value;
-    return *this;
-}
-
-Geometry::Angle const Geometry::Angle::operator-() const {
-    return Angle(-m_value);
-}
-
-Geometry::Angle & Geometry::Angle::operator+=(Angle const & aAngle) {
-    m_value += aAngle.m_value;
-    return *this;
-}
-
-Geometry::Angle & Geometry::Angle::operator-=(Geometry::Angle const & aAngle) {
-    m_value -= aAngle.m_value;
-    return *this;
-}
-
-Geometry::Angle & Geometry::Angle::operator*=(const double &aValue) {
-    m_value *= aValue;
-    return *this;
-}
-
-Geometry::Angle & Geometry::Angle::operator/=(const double &aValue) {
-    m_value /= aValue;
-    return *this;
-}
-
-Geometry::Angle Geometry::Angle::RAD(double const aValue) {
-    return Angle(aValue);
-}
-
-Geometry::Angle Geometry::Angle::DEG(double const aValue) {
-    return Angle(aValue*DEG_TO_RAD);
-}
-
-Geometry::Angle Geometry::Angle::DEG100th(double const aValue) {
-    return Angle(aValue*DEG100TH_TO_RAD);
-}
-
-Geometry::Angle Geometry::Angle::Modulo2PI(double const aRangeMin) const
-{
-    double normalizedValue = GetNormalizedValue(m_value, aRangeMin);
-    return Angle(normalizedValue);
 }
 
 #endif //__ANGLE_H__

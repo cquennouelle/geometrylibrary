@@ -13,4 +13,3 @@ namespace Geometry
     static double const DEG100TH_TO_RAD = DEG_TO_RAD * 0.01;
     static double const RAD_TO_DEG100TH = RAD_TO_DEG * 100.0;
 }
-

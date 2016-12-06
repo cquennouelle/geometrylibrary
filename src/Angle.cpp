@@ -5,6 +5,12 @@ using namespace Geometry;
 
 Angle Angle::m_EPSILON = Angle(ANGLE_EPSILON);
 
+Angle::Angle():m_value(0.0) {}
+
+Angle::Angle(Angle const & angle):m_value(angle.m_value) {}
+
+Angle::Angle(double const value):m_value(value) {}
+
 double Angle::GetNormalizedValue(double const aValue, double const aRangeMin)
 {
     double normalizedValue;

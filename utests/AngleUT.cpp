@@ -449,7 +449,6 @@ TEST_F(Angle_Test, Arctan2)
     {
         double val = range_min + increment;
         Angle angle = arctan2(sin(val), cos(val));
-        EXPECT_EQ(angle, RAD(atan(val)));
-        EXPECT_LT(fabs(tan(angle) - val), 1e-10);
+        EXPECT_LT(fabs(angle - RAD(val).Modulo2PI()), RAD(1e-10));
     }
 }
