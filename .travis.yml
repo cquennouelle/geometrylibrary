@@ -2,6 +2,12 @@ language: cpp
 
 before_install: sudo apt-get update
 
-install: sudo apt-get install --yes --force-yes cmake libgtest-dev
+install: sudo apt-get install --yes --force-yes cmake libgtest-de
+	&& cd /usr/src/gtest
+	&& sudo cmake .
+	&& sudo make
+	&& sudo mv libg* /usr/lib/v
+	&& sudo cp -a include/gtest /usr/include
+	&& sudo cp -a libgtest_main.so libgtest.so /usr/lib/
 
 script : ./build-and-test.sh
