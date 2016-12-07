@@ -17,5 +17,5 @@ install:
  - cd build
  - cmake ..
  - make
- - utests/Geomery_UT
+ - utests/Geometry_UT
 
