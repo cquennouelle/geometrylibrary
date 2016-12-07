@@ -1,5 +1,5 @@
 # geometrylibrary
-
+[![Build Status](https://travis-ci.org/cquennouelle/geometrylibrary.svg?branch=master)](https://travis-ci.org/cquennouelle/geometrylibrary)
 Objectives
 ==========
 
@@ -11,7 +11,8 @@ Pet project to avoid reinventing the wheel on my side and to implement a geometr
 
 Installation
 ============
-Requires GTests (and Python ?)
+Requires Boost for Python
+Requires GTest for unittests
 
 - Clone repository
 
@@ -20,11 +21,19 @@ Requires GTests (and Python ?)
 - Create build directory and build source code:
 	
 	$ cd geometrylibrary
+	
 	$ mkdir build
+	
 	$ cd build
+	
 	$ cmake ..
+	
 	$ make
 
 - Launch tests
 	
+	$ make test
+	
+or
+
 	$ utests/Geometry_UT
