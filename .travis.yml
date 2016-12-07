@@ -16,4 +16,4 @@ install:
  - mkdir build
  - cd build
  - cmake ..
-
+ - mv ../configure .
