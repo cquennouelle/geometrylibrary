@@ -12,9 +12,5 @@ install:
 - sudo cp -a include/gtest /usr/include
 - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
 
-- sudo mv libg* /usr/lib/.
-- sudo cp -a include/gtest /usr/include
-- sudo cp -a libgtest_main.so libgtest.so /usr/lib/
-
 script : ./build-and-test.sh
 
