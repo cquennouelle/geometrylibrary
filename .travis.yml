@@ -1,11 +1,7 @@
 language: cpp
 
-before_install:
-	- sudo apt-get remove cmake --yes
-	- sudo apt-get update
+before_install: sudo apt-get update
 
-install:
-	- sudo apt-get install --yes --force-yes cmake libgtest-dev
+install: sudo apt-get install --yes --force-yes cmake libgtest-dev
 
-script : 
-	- ./build-and-test.sh
+script : ./build-and-test.sh
