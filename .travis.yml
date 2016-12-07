@@ -1,1 +1,9 @@
-script : ./build-and-test.sh
+before_install:
+	- sudo apt-get remove cmake --yes
+	- sudo apt-get update
+
+install:
+	- sudo apt-get install -y cmake libgtest-dev
+
+script : 
+	./build-and-test.sh
