@@ -12,9 +12,10 @@ before_install:
 - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
 
 install:
+ - cd ~/geometrylibrary
  - mkdir build
  - cd build
- - cmake..
+ - cmake ..
  - make
  - utests/Geomery_UT
 
