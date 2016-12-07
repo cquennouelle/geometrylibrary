@@ -1,8 +1,7 @@
 language: cpp
 
-before_install: sudo apt-get update
-
-install: 
+before_install: 
+- sudo apt-get update
 - sudo apt-get install --yes --force-yes cmake libtar-dev
 - wget https://github.com/google/googletest/archive/release-1.7.0.tar.gz
 - tar xf release-1.7.0.tar.gz
@@ -12,5 +11,10 @@ install:
 - sudo cp -a include/gtest /usr/include
 - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
 
-script : ./build-and-test.sh
+install:
+ - mkdir build
+ - cd build
+ - cmake..
+ - make
+ - utests/Geomery_UT
 
