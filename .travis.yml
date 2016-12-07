@@ -3,10 +3,15 @@ language: cpp
 before_install: sudo apt-get update
 
 install: 
-- sudo apt-get install --yes --force-yes cmake libgtest-dev
-- cd /usr/src/gtest
-- sudo cmake .
-- sudo make
+- sudo apt-get install --yes --force-yes cmake
+- wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz
+- tar xf release-1.7.0.tar.gz
+- cd googletest-release-1.7.0
+- cmake -DBUILD_SHARED_LIBS=ON .
+- make
+- sudo cp -a include/gtest /usr/include
+- sudo cp -a libgtest_main.so libgtest.so /usr/lib/
+
 - sudo mv libg* /usr/lib/.
 - sudo cp -a include/gtest /usr/include
 - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
