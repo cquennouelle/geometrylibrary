@@ -7,7 +7,7 @@ install:
 - cd /usr/src/gtest
 - sudo cmake .
 - sudo make
-- sudo mv libg* /usr/lib/v
+- sudo mv libg* /usr/lib/.
 - sudo cp -a include/gtest /usr/include
 - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
 
