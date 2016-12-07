@@ -14,11 +14,11 @@ Installation
 Requires Boost for Python
 Requires GTest for unittests
 
-- Clone repository
+Clone repository
 
 	$ git clone https://github.com/cquennouelle/geometrylibrary.git
 
-- Create build directory and build source code:
+Create build directory and build source code:
 	
 	$ cd geometrylibrary
 	
@@ -30,10 +30,11 @@ Requires GTest for unittests
 	
 	$ make
 
-- Launch tests
+Launch tests
 	
 	$ make test
 	
 or
 
 	$ utests/Geometry_UT
+
