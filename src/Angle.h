@@ -41,156 +41,97 @@ public:
      * \brief Get the angle value in radian
      * \return double
      */
-    inline double Rad() const;
+    double Rad() const;
 
     /**
      * \brief Get the angle value in degree.
      * \return double
      */
-    inline double Deg() const;
+    double Deg() const;
 
     /**
      * \brief Get the angle value in 1/100 of degree.
      * \return double
      */
-    inline double Deg100th() const;
+    double Deg100th() const;
 
     /**
      * \brief Get the angle of neglectible value.
      * \return Angle close to zero.
      */
-    inline static Angle const EPSILON();
+    static Angle const EPSILON();
 
-    inline Angle & operator=(Angle const & angle);
+    Angle & operator=(Angle const & angle);
 
     /**
      * \brief IsEqual operator.
      * \remark Angles are equal if difference is smaller than Angle::EPSILON()
      * \return bool
      */
-    inline bool const operator==(Geometry::Angle const & angle) const;
+    bool const operator==(Geometry::Angle const & angle) const;
 
     /**
      * \brief IsNotEqual operator.
      * \remark Angles are equal if difference is smaller than Angle::EPSILON()
      * \return bool
      */
-    inline bool const operator!=(Geometry::Angle const & angle) const;
+    bool const operator!=(Geometry::Angle const & angle) const;
 
-    inline Angle const operator-() const;
-    inline Angle & operator+=(Angle const & angle);
-    inline Angle & operator-=(Angle const & angle);
-    inline Angle & operator*=(double const & value);
-    inline Angle & operator/=(double const & value);
+    Angle const operator-() const;
+    Angle & operator+=(Angle const & angle);
+    Angle & operator-=(Angle const & angle);
+    Angle & operator*=(double const & value);
+    Angle & operator/=(double const & value);
 
     /**
      * @brief Factory method to create an angle.
      * @param value of the angle in radian.
      * @return New angle.
      */
-    inline static Angle RAD(double const value);
+    static Angle RAD(double const value);
 
     /**
      * @brief Factory method to create an angle.
      * @param Value of the angle in degree.
      * @return New angle.
      */
-    inline static Angle DEG(double const value);
+    static Angle DEG(double const value);
 
     /**
      * @brief Factory method to create an angle.
      * @param Value of the angle in 1/100 degree.
      * @return New angle.
      */
-    inline static Angle DEG100th(double const value);
+    static Angle DEG100th(double const value);
 
     /**
      * @brief Get the equivalent angle in a 2-PI period
      * @param Min value of the period
-     * @return Equivalent angle between [rangeMin, rangeMin+2PI[
+     * @return Equivalent angle between [offset, offset+2PI[
      */
-    inline Angle Modulo2PI(double const rangeMin = 0.0) const;
+    Angle Modulo2PI(double const offset = 0.0) const;
 
 private:
     /**
      * @brief Constructor form a double
      * @remark Use forbidden. Use factory method RAD, DEG, etc.
-     * @param Angle with a value of aValue in radian
+     * @param Angle with a value in radian
      */
-    Angle(double const aValue);
+    Angle(double const value);
 
-    static double GetNormalizedValue(double const value, double const rangeMin);
+    static double GetNormalizedValue(double const value, double const offset);
 
 private:
     double m_value; //!< Internal value of the angle in Radian.
     static Angle m_EPSILON; //!< Value for comparison between angles
 };
 
-inline Angle RAD(double const aValue) { return Angle::RAD(aValue); }
+inline Angle RAD(double const value) { return Angle::RAD(value); }
 
-inline Angle DEG(double const aValue) { return Angle::DEG(aValue); }
+inline Angle DEG(double const value) { return Angle::DEG(value); }
 
-inline Angle DEG100th(double const aValue) { return Angle::DEG100th(aValue); }
+inline Angle DEG100th(double const value) { return Angle::DEG100th(value); }
 
-//////////////////////////////////////////////////////////////////////////////////////
-// Inline member methods
-//////////////////////////////////////////////////////////////////////////////////////
-
-double Angle::Rad() const { return m_value; }
-
-double Angle::Deg() const { return m_value * RAD_TO_DEG; }
-
-double Angle::Deg100th() const { return m_value * RAD_TO_DEG100TH; }
-
-Angle const Angle::EPSILON() { return Angle::m_EPSILON; }
-
-bool const Angle::operator==(Angle const & angle) const {
-    double const diff = fabs(Rad()-angle.Rad());
-    return diff < ANGLE_EPSILON;
-}
-
-bool const Angle::operator!=(Angle const & angle) const {
-    return !((*this)==angle);
-}
-
-Angle & Angle::operator=(Angle const &angle) {
-    m_value = angle.m_value;
-    return *this;
-}
-
-Angle const Angle::operator-() const { return Angle(-m_value); }
-
-Angle & Angle::operator+=(Angle const & angle) {
-    m_value += angle.m_value;
-    return *this;
-}
-
-Angle & Angle::operator-=(Angle const & angle) {
-    m_value -= angle.m_value;
-    return *this;
-}
-
-Angle & Angle::operator*=(const double &value) {
-    m_value *= value;
-    return *this;
-}
-
-Angle & Angle::operator/=(const double &value) {
-    m_value /= value;
-    return *this;
-}
-
-Angle Angle::RAD(double const value) { return Angle(value); }
-
-Angle Angle::DEG(double const value) { return Angle(value*DEG_TO_RAD); }
-
-Angle Angle::DEG100th(double const value) { return Angle(value*DEG100TH_TO_RAD); }
-
-Angle Angle::Modulo2PI(double const rangeMin) const
-{
-    double normalizedValue = GetNormalizedValue(m_value, rangeMin);
-    return Angle(normalizedValue);
-}
 }
 
 inline Geometry::Angle const operator+(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
