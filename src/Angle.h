@@ -2,7 +2,6 @@
 #define __ANGLE_H__
 #include "Constants.h"
 #include <iostream>
-#include <cmath>
 
 /**
  * \file Angle.h
@@ -134,105 +133,79 @@ inline Angle DEG100th(double const value) { return Angle::DEG100th(value); }
 
 }
 
-inline Geometry::Angle const operator+(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
-    return Geometry::Angle(angle)+=angle2;
-}
+Geometry::Angle const operator+(Geometry::Angle const & angle, Geometry::Angle const & angle2);
 
-inline Geometry::Angle const operator-(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
-    return Geometry::Angle(angle)-=angle2;
-}
+Geometry::Angle const operator-(Geometry::Angle const & angle, Geometry::Angle const & angle2);
 
-inline Geometry::Angle const operator*(Geometry::Angle const & angle, double const & value) {
-    return Geometry::Angle(angle)*=value;
-}
-inline Geometry::Angle const operator/(Geometry::Angle const & angle, double const & value) {
-    return Geometry::Angle(angle)/=value;
-}
+Geometry::Angle const operator*(Geometry::Angle const & angle, double const & value);
 
-inline bool const operator>(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2) {
-    return aAngle.Rad() > aAngle2.Rad();
-}
+Geometry::Angle const operator/(Geometry::Angle const & angle, double const & value);
 
-inline bool const operator<(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
-    return angle.Rad() < angle2.Rad();
-}
+bool const operator>(Geometry::Angle const & aAngle, Geometry::Angle const & aAngle2);
 
-inline bool const operator>=(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
-    return angle.Rad() >= angle2.Rad();
-}
+bool const operator<(Geometry::Angle const & angle, Geometry::Angle const & angle2);
 
-inline bool const operator<=(Geometry::Angle const & angle, Geometry::Angle const & angle2) {
-    return angle.Rad() <= angle2.Rad();
-}
+bool const operator>=(Geometry::Angle const & angle, Geometry::Angle const & angle2);
 
-inline Geometry::Angle operator*(double const value, Geometry::Angle const & angle) {
-    return angle * value;
-}
+bool const operator<=(Geometry::Angle const & angle, Geometry::Angle const & angle2);
+
+Geometry::Angle operator*(double const value, Geometry::Angle const & angle);
 
 /**
  * @brief Overload of cosinus
  * @param Angle
  * @return cos
  */
-inline double cos(Geometry::Angle const & angle) {
-    return cos(angle.Rad()); }
+double cos(Geometry::Angle const & angle);
 
 /**
  * @brief Overload of sinus
  * @param Angle
  * @return sin
  */
-inline double sin(Geometry::Angle const & aAngle) {
-    return sin(aAngle.Rad()); }
+double sin(Geometry::Angle const & aAngle);
 
 /**
  * @brief Overload of tangent
  * @param Angle
  * @return tan
  */
-inline double tan(Geometry::Angle const & angle) {
-    return tan(angle.Rad()); }
+double tan(Geometry::Angle const & angle);
 
 /**
  * @brief Overload of absolute value
  * @param Angle
  * @return Angle with positive value
  */
-inline Geometry::Angle fabs(Geometry::Angle const & angle) {
-    return Geometry::RAD(fabs(angle.Rad()));
-}
+Geometry::Angle fabs(Geometry::Angle const & angle);
 
 /**
  * @brief Overload of acos to get an angle
  * @param Value of the cosinus
  * @return Angle
  */
-inline Geometry::Angle arccos(double const cosinus) {
-    return Geometry::RAD(acos(cosinus)); }
+Geometry::Angle arccos(double const cosinus);
 
 /**
  * @brief Overload of asin to get an angle
  * @param Value of the sinus
  * @return Angle
  */
-inline Geometry::Angle arcsin(double const sinus) {
-    return Geometry::RAD(asin(sinus)); }
+Geometry::Angle arcsin(double const sinus);
 
 /**
  * @brief Overload of atan to get an angle
  * @param Value of the tangent
  * @return Angle
  */
-inline Geometry::Angle arctan(double const tangent) {
-    return Geometry::RAD(atan(tangent)); }
+Geometry::Angle arctan(double const tangent);
 
 /**
  * @brief Overload of atan2 to get an angle
  * @param Value of the cosinus
  * @return Angle
  */
-inline Geometry::Angle arctan2(double const sinus, double const cosinus) {
-    return Geometry::RAD(atan2(sinus, cosinus)); }
+Geometry::Angle arctan2(double const sinus, double const cosinus);
 
 /**
  * @brief Overload operator <<
@@ -240,9 +213,6 @@ inline Geometry::Angle arctan2(double const sinus, double const cosinus) {
  * @param Angle aAngle
  * @return Ostream
  */
-inline std::ostream & operator<<(std::ostream & out, Geometry::Angle const & angle) {
-    out << angle.Rad();
-    return out;
-}
+std::ostream & operator<<(std::ostream & out, Geometry::Angle const & angle);
 
 #endif //__ANGLE_H__

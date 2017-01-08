@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
-project(Geometry_wrapper)
+project(GeometryPython)
 
 include_directories(/usr/include/python2.7)
 
@@ -21,15 +21,17 @@ if(Boost_FOUND)
     find_package(PythonLibs REQUIRED)
     include_directories(${PYTHON_INCLUDE_DIRS})
     link_directories(${PYTHON_LIBRARIES})
+    link_directories(${Boost_LIBRARIES})
 
     ## Create a library
     include_directories(../src)
     add_library(GeometryPython SHARED
-                            ${GEOMETRY_WRAPPER_SOURCES}
-                            ${GEOMETRY_WRAPPER_HEADERS})
+                            ${GEOMETRY_WRAPPER_HEADERS}
+                            ${GEOMETRY_WRAPPER_SOURCES})
     target_link_libraries(GeometryPython
-                            ${Boost_LIBRARIES}
-                            ${PYTHON_LIBRARIES})
+                            Geometry
+                            ${PYTHON_LIBRARIES}
+                            ${Boost_LIBRARIES})
 else()
     message(FATAL_ERROR "Unable to find correct Bost version.")
 endif()

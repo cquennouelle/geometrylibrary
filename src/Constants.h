@@ -1,3 +1,7 @@
+#include "SharedMacros.h"
+
+#include <cmath>
+
 namespace Geometry
 {
     // Fundamental constant

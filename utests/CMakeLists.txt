@@ -9,10 +9,10 @@ if(GTEST_FOUND)
 
     # Create an application
     file(GLOB UNITTESTS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-    ADD_EXECUTABLE(Geometry_UT	${UNITTESTS})
-    TARGET_LINK_LIBRARIES(Geometry_UT   	Geometry
-                                            ${GTEST_BOTH_LIBRARIES}
-                                            pthread)
+    ADD_EXECUTABLE(Geometry_UT ${UNITTESTS})
+    TARGET_LINK_LIBRARIES(Geometry_UT   Geometry
+                                        ${GTEST_BOTH_LIBRARIES}
+                                        pthread)
 else()
     message("GTest NOT found.")
 endif()
