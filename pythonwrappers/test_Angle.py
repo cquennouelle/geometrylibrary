@@ -25,6 +25,7 @@ if __name__ == '__main__':
     a += c
     a += d
     b = a
+    print(b)
     print(a.Rad())
     print(a==c)
     print(a==b)

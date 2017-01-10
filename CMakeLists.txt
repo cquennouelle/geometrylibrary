@@ -7,10 +7,11 @@ SET(CMAKE_CXX_STANDARD 11)
 ### Make Geometry lib
 add_subdirectory("${CMAKE_SOURCE_DIR}/src/")
 
+### Make Python wrapper
+add_subdirectory("${CMAKE_SOURCE_DIR}/pythonwrappers/")
+
 ### Make unittests
 enable_testing(true)
 add_subdirectory("${CMAKE_SOURCE_DIR}/utests/")
-add_test(test utests/Geometry_UT)
+add_test(NAME test COMMAND ./utests/Geometry_UT)
 
-### Make Python wrapper
-add_subdirectory("${CMAKE_SOURCE_DIR}/pythonwrappers/")
